@@ -1,32 +1,5 @@
 <script setup>
-import { onMounted, ref } from "vue";
-import axios from "axios";
-import ProductList from "./components/ProductList.vue";
-
-// Создаем пустой массив
-const items = ref([]);
-
-// Функция для загрузки данных с Mokky.dev
-const fetchItems = async () => {
-  try {
-    const { data } = await axios.get(
-      "https://003755c8a74ecdc7.mokky.dev/items" // Ваша ссылка
-    );
-    
-    items.value = data.map((obj) => ({
-      ...obj,
-      isFavorite: false,
-      isAdded: false,
-    }));
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-// Вызываем загрузку при старте
-onMounted(async () => {
-  await fetchItems();
-});
+import VCatalog from "./components/VCatalog.vue";
 </script>
 
 <template>
@@ -68,9 +41,7 @@ onMounted(async () => {
       </nav>
       
       <main class="pt-10">
-        <h1 class="text-[40px] font-bold mb-5">Каталог</h1>
-        <!-- Передаем массив items в наш компонент -->
-        <product-list :items="items"></product-list>
+        <v-catalog></v-catalog>
       </main>
       
     </div>
